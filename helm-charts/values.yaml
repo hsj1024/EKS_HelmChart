@@ -1,0 +1,28 @@
+replicaCount: 2
+
+# 각각의 타임스탬프를 독립적으로 관리
+backendTimestamp: "latest"
+frontendTimestamp: "latest"
+
+backend:
+  image:
+    repository: ""  # Argo CD에서 환경 변수로 주입
+    tag: "{{ .Values.backendTimestamp | default \"latest\" }}"
+    pullPolicy: Always
+  service:
+    type: LoadBalancer
+    port: 8080
+
+frontend:
+  image:
+    repository: ""  # Argo CD에서 환경 변수로 주입
+    tag: "{{ .Values.frontendTimestamp | default \"latest\" }}"
+    pullPolicy: Always
+  service:
+    type: LoadBalancer
+    port: 80
+
+ingress:
+  awsCertArn: ""
+  tlsSecretName: ""
+  hostName: "example.com"
