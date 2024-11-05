@@ -7,7 +7,7 @@ frontendTimestamp: "latest"
 backend:
   image:
     repository: ""  # Argo CD에서 환경 변수로 주입
-    tag: "{{ .Values.backendTimestamp | default \"latest\" }}"
+    tag: "latest"
     pullPolicy: Always
   service:
     type: LoadBalancer
@@ -16,7 +16,7 @@ backend:
 frontend:
   image:
     repository: ""  # Argo CD에서 환경 변수로 주입
-    tag: "{{ .Values.frontendTimestamp | default \"latest\" }}"
+    tag: "latest"
     pullPolicy: Always
   service:
     type: LoadBalancer
@@ -25,4 +25,4 @@ frontend:
 ingress:
   awsCertArn: ""
   tlsSecretName: ""
-  hostName: "example.com"
+  hostName: "shortpingoo.shop"

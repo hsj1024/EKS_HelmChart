@@ -1,3 +1,4 @@
+# backend deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,12 +17,19 @@ spec:
     spec:
       containers:
         - name: backend-container
-          image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.backend.service.port }}
+          envFrom:
+            - configMapRef:
+                name: shortpingoo-config
+            - secretRef:
+                name: shortpingoo-secrets
 
 ---
+
+# frontend deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -44,3 +52,8 @@ spec:
           imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.frontend.service.port }}
+          envFrom:
+            - configMapRef:
+                name: shortpingoo-config
+            - secretRef:
+                name: shortpingoo-secrets
