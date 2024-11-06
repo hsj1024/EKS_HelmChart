@@ -15,6 +15,8 @@ spec:
       labels:
         app: backend
     spec:
+      imagePullSecrets:
+        - name: regcred  # ECR 인증을 위한 시크릿 이름
       containers:
         - name: backend-container
           image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
@@ -46,9 +48,11 @@ spec:
       labels:
         app: frontend
     spec:
+      imagePullSecrets:
+        - name: regcred  # ECR 인증을 위한 시크릿 이름
       containers:
         - name: frontend-container
-          image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
+          image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
           imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.frontend.service.port }}
