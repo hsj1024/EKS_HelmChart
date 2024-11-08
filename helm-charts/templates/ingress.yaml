@@ -3,17 +3,19 @@ kind: Ingress
 metadata:
   name: {{ .Release.Name }}-ingress
   annotations:
-    kubernetes.io/ingress.class: "nginx"
-    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:ap-northeast-2:565393064007:certificate/82c4718b-d3ec-4d6b-9233-bfaa647368d2"
-    service.beta.kubernetes.io/aws-load-balancer-ssl-redirect: "443"
+    kubernetes.io/ingress.class: "alb"
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:ap-northeast-2:565393064007:certificate/82c4718b-d3ec-4d6b-9233-bfaa647368d2"
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
 spec:
-  ingressClassName: "nginx"
+  ingressClassName: "alb"
   rules:
     - host: shortpingoo.shop
       http:
         paths:
           - path: /
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
                 name: {{ .Release.Name }}-frontend-svc
@@ -33,3 +35,7 @@ spec:
                 name: {{ .Release.Name }}-backend-svc
                 port:
                   number: {{ .Values.backend.service.port }}
+  tls:
+    - hosts:
+        - shortpingoo.shop
+      secretName: {{ .Release.Name }}-tls

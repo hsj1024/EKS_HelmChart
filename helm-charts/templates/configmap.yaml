@@ -3,12 +3,16 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-config
 data:
+  # 백엔드 환경 변수
   SERVER_PORT: "{{ .Values.env.config.SERVER_PORT }}"
   JWT_SECRET: "{{ .Values.env.config.JWT_SECRET }}"
-  CORS_ALLOWED_ORIGINS: "{{ .Values.env.config.CORS_ALLOWED_ORIGINS }}"
+  # CORS_ALLOWED_ORIGINS: "{{ .Values.env.config.CORS_ALLOWED_ORIGINS }}"
   CORS_ALLOWED_METHODS: "{{ .Values.env.config.CORS_ALLOWED_METHODS }}"
   SECURITY_USER_NAME: "{{ .Values.env.config.SECURITY_USER_NAME }}"
   SECURITY_USER_PASSWORD: "{{ .Values.env.config.SECURITY_USER_PASSWORD }}"
   TOKEN_SECRET_KEY: "{{ .Values.env.config.TOKEN_SECRET_KEY }}"
   ACCESS_TOKEN_PLUS_HOUR: "{{ .Values.env.config.ACCESS_TOKEN_PLUS_HOUR }}"
   REFRESH_TOKEN_PLUS_HOUR: "{{ .Values.env.config.REFRESH_TOKEN_PLUS_HOUR }}"
+  
+  # 프론트엔드 환경 변수
+  REACT_APP_API_BASE_URL: "{{ .Values.env.config.REACT_APP_API_BASE_URL }}"
