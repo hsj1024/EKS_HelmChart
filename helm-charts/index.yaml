@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  shortpingoo:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2024-11-13T00:14:16.21951+09:00"
+    description: A Helm chart for deploying the shortpingoo application
+    digest: 571311a1a17c527aa2a3302330ee535e93778358d278f36042b1978f3af97427
+    name: shortpingoo
+    urls:
+    - https://hsj1024.github.io/HelmChart-for-Argo/shortpingoo-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-11-13T00:14:16.218366+09:00"
