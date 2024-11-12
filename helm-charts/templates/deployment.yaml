@@ -61,8 +61,3 @@ spec:
                 name: shortpingoo-config
             - secretRef:
                 name: shortpingoo-secrets
-          env:  # 여기에 추가 환경 변수를 설정합니다.
-            - name: REACT_APP_API_BASE_URL
-              value: "{{ .Values.env.config.REACT_APP_API_BASE_URL }}"
-            - name: REACT_APP_ENV
-              value: "{{ .Values.env.config.REACT_APP_ENV }}"
