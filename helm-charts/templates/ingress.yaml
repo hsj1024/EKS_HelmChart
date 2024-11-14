@@ -22,20 +22,20 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ .Release.Name }}-frontend-svc
+                name: shortpingoo-frontend-svc
                 port:
                   number: {{ .Values.frontend.service.port }}
           - path: /api
             pathType: Prefix
             backend:
               service:
-                name: {{ .Release.Name }}-backend-svc
+                name: shortpingoo-backend-svc
                 port:
                   number: {{ .Values.backend.service.port }}
           - path: /open-api
             pathType: Prefix
             backend:
               service:
-                name: {{ .Release.Name }}-backend-svc
+                name: shortpingoo-backend-svc
                 port:
                   number: {{ .Values.backend.service.port }}
