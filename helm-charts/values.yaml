@@ -32,7 +32,7 @@ frontend:
     type: LoadBalancer
     port: 80
   env:
-    REACT_APP_API_BASE_URL: "http://a7e1ce1d1f8a7498f805319f0350a39d-674113523.ap-northeast-2.elb.amazonaws.com:8080"
+    REACT_APP_API_BASE_URL: "https://shortpingoo.shop"
     REACT_APP_ENV: "production"
 ingress:
   awsCertArn: "arn:aws:acm:ap-northeast-2:565393064007:certificate/82c4718b-d3ec-4d6b-9233-bfaa647368d2"
