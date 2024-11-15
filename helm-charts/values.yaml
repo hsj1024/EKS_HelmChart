@@ -1,7 +1,7 @@
 replicaCount: 1
 # 각각의 타임스탬프를 독립적으로 관리
 backendTimestamp: "latest"
-frontendTimestamp: "20241115045923"
+frontendTimestamp: "20241115051919"
 backend:
   image:
     repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-users-ecr"
@@ -26,7 +26,7 @@ backend:
 frontend:
   image:
     repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/frontend-ecr"
-    tag: "20241115045805"
+    tag: "20241115051802"
     pullPolicy: Always
   service:
     type: LoadBalancer
