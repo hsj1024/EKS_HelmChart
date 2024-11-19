@@ -40,3 +40,10 @@ spec:
                 name: shortpingoo-backend-svc
                 port:
                   number: 8080
+          - path: /eureka
+            pathType: Prefix
+            backend:
+              service:
+                name: shortpingoo-eureka-server
+                port:
+                  number: 8088
