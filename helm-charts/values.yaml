@@ -38,7 +38,7 @@ eureka:
   enabled: true
   server:
     image:
-      repository: netflixoss/eureka
+      repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/eurekaforkubnernetes"
       tag: "latest"
     service:
       type: ClusterIP
