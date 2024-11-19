@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: eureka-server
-        image: "netflixoss/eureka:latest"
+        image: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/eurekaforkubnernetes:latest"
         ports:
         - containerPort: 8088
         env:
