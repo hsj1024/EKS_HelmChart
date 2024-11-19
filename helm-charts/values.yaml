@@ -13,10 +13,10 @@ backend:
     targetPort: 8080
   env:
     SERVER_PORT: "8080"
-    JWT_SECRET: "SpringBootJWTHelperTokenSecretKeyValue123!@#"
+    JWT_SECRET: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
     SECURITY_USER_NAME: "admin"
     SECURITY_USER_PASSWORD: "1234"
-    TOKEN_SECRET_KEY: "SpringBootJWTHelperTokenSecretKeyValue123!@#"
+    TOKEN_SECRET_KEY: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
     ACCESS_TOKEN_PLUS_HOUR: "1"
     REFRESH_TOKEN_PLUS_HOUR: "24"
     secret:
@@ -34,6 +34,26 @@ frontend:
   env:
     REACT_APP_API_BASE_URL: "https://shortpingoo.shop"
     REACT_APP_ENV: "production"
+# eureka:
+#   enabled: true
+#   server:
+#     image:
+#       repository: netflixoss/eureka
+#       tag: latest
+#     service:
+#       type: ClusterIP
+#       port: 8761
+#     ingress:
+#       enabled: true
+#       host: eureka.shortpingoo.shop
+#       certificateArn: "arn:aws:acm:ap-northeast-2:565393064007:certificate/82c4718b-d3ec-4d6b-9233-bfaa647368d2"
+#   client:
+#     serviceUrl:
+#       defaultZone: "http://eureka.shortpingoo.shop/eureka/"
+#     instance:
+#       preferIpAddress: true
+#       leaseRenewalIntervalInSeconds: 10
+#       leaseExpirationDurationInSeconds: 30
 ingress:
   awsCertArn: "arn:aws:acm:ap-northeast-2:565393064007:certificate/82c4718b-d3ec-4d6b-9233-bfaa647368d2"
   tlsSecretName: "shortpingoo-secrets"
