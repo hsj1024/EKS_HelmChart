@@ -1,13 +1,13 @@
 replicaCount: 1
 # 각각의 타임스탬프를 독립적으로 관리
-backendTimestamp: "20241120155139"
+backendTimestamp: "20241120162223"
 frontendTimestamp: "20241119092509"
 backend:
   services:
     - name: backend-users
       image:
         repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-users-ecr"
-        tag: "20241120153208"
+        tag: "20241120162002"
         pullPolicy: Always
       ports:
         - number: 8080
