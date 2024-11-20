@@ -45,6 +45,9 @@ backend:
         pullPolicy: Always
       ports:
         - number: 8089
+      env:
+        secret: {}
+      
 frontend:
   image:
     repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/frontend-ecr"

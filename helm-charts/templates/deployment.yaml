@@ -20,11 +20,14 @@ spec:
       imagePullSecrets:
         - name: regcred  # ECR 인증을 위한 시크릿 이름
       containers:
+        
         - name: {{ .name }}-container
           image: "{{ .image.repository }}:{{ .image.tag }}"
           imagePullPolicy: {{ .image.pullPolicy }}
           ports:
-            - containerPort: {{ .ports[0].number }}
+            {{- range .ports }}
+            - containerPort: {{ .number }}
+            {{- end }}
           env:
             {{- range $key, $value := .env }}
             - name: {{ $key }}

@@ -10,9 +10,11 @@ spec:
   selector:
     app: {{ .name }}
   ports:
+    {{- range .ports }}
     - protocol: TCP
-      port: {{ .ports[0].number }}
-      targetPort: {{ .ports[0].number }}
+      port: {{ .number }}
+      targetPort: {{ .number }}
+    {{- end }}
 {{- end }}
 
 ---

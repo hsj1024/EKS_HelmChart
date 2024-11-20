@@ -41,21 +41,22 @@ spec:
                 port:
                   number: 8080
 
-          # Backend 경로 (API, Open-API)
           {{- range .Values.backend.services }}
+          {{- range .ports }}
+
           - path: /api
             pathType: Prefix
             backend:
               service:
                 name: {{ .name }}-svc
                 port:
-                  number: {{ .ports[0].number }}
+                  number: {{ .number }}
           - path: /open-api
             pathType: Prefix
             backend:
               service:
                 name: {{ .name }}-svc
                 port:
-                  number: {{ .ports[0].number }}
+                  number: {{ .number }}
           {{- end }}
-          
+          {{- end }}
