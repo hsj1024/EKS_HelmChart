@@ -1,13 +1,13 @@
 replicaCount: 1
 # 각각의 타임스탬프를 독립적으로 관리
-backendTimestamp: "latest"
+backendTimestamp: "20241120153426"
 frontendTimestamp: "20241119092509"
 backend:
   services:
     - name: backend-users
       image:
         repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-users-ecr"
-        tag: "latest"
+        tag: "20241120153208"
         pullPolicy: Always
       ports:
         - number: 8080
@@ -23,7 +23,6 @@ backend:
         USER_DB_URL: "jdbc:mariadb://users-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/usersdb"
         USER_DB_USERNAME: "shoppingooadmin"
         USER_DB_PASSWORD: "404notfound!"
-
     - name: backend-brand
       image:
         repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-brand-ecr"
@@ -37,7 +36,6 @@ backend:
         BRAND_DB_URL: "jdbc:mariadb://brand-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/brand-shoppingoo-database-cicd:3306/branddb"
         BRAND_DB_USERNAME: "shoppingooadmin"
         BRAND_DB_PASSWORD: "404notfound!"
-
     - name: backend-apigateway
       image:
         repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/apigateway-ecr"
@@ -47,7 +45,6 @@ backend:
         - number: 8089
       env:
         secret: {}
-
 frontend:
   image:
     repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/frontend-ecr"
@@ -59,7 +56,6 @@ frontend:
   env:
     REACT_APP_API_BASE_URL: "https://shortpingoo.shop"
     REACT_APP_ENV: "production"
-
 ingress:
   awsCertArn: "arn:aws:acm:ap-northeast-2:565393064007:certificate/82c4718b-d3ec-4d6b-9233-bfaa647368d2"
   tlsSecretName: "shortpingoo-secrets"
