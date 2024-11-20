@@ -29,9 +29,13 @@ spec:
             - containerPort: {{ .number }}
             {{- end }}
           env:
+            {{- if .env }}
             {{- range $key, $value := .env }}
             - name: {{ $key }}
               value: "{{ $value }}"
+            {{- end }}
+            {{- else }}
+            # No environment variables for {{ .name }}
             {{- end }}
             {{- range $key, $value := .secret }}
             - name: {{ $key }}

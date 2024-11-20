@@ -25,21 +25,6 @@ spec:
                 name: shortpingoo-frontend-svc
                 port:
                   number: 80
-          - path: /api
-            pathType: Prefix
-            backend:
-              service:
-                name: shortpingoo-backend-svc
-                port:
-                  number: 8080
-          - path: /open-api
-            pathType: Prefix
-            backend:
-              service:
-                name: shortpingoo-backend-svc
-                port:
-                  number: 8080
-
           {{- range .Values.backend.services }}
           {{- $serviceName := .name }}
           {{- range .ports }}

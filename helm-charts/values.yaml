@@ -9,34 +9,34 @@ backend:
         repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-users-ecr"
         tag: "latest"
         pullPolicy: Always
-        ports:
-          - number : 8080
-        env:
-          USER_SERVER_PORT: "8080"
-          USER_JWT_SECRET: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
-          USER_SECURITY_USER_NAME: "admin"
-          USER_SECURITY_USER_PASSWORD: "1234"
-          USER_TOKEN_SECRET_KEY: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
-          USER_ACCESS_TOKEN_PLUS_HOUR: "1"
-          USER_REFRESH_TOKEN_PLUS_HOUR: "24"
-          secret:
-            USER_DB_URL: "jdbc:mariadb://users-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/usersdb"
-            USER_DB_USERNAME: "shoppingooadmin"
-            USER_DB_PASSWORD: "404notfound!"
+      ports:
+        - number: 8080
+      env:
+        USER_SERVER_PORT: "8080"
+        USER_JWT_SECRET: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
+        USER_SECURITY_USER_NAME: "admin"
+        USER_SECURITY_USER_PASSWORD: "1234"
+        USER_TOKEN_SECRET_KEY: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
+        USER_ACCESS_TOKEN_PLUS_HOUR: "1"
+        USER_REFRESH_TOKEN_PLUS_HOUR: "24"
+      secret:
+        USER_DB_URL: "jdbc:mariadb://users-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/usersdb"
+        USER_DB_USERNAME: "shoppingooadmin"
+        USER_DB_PASSWORD: "404notfound!"
 
     - name: backend-brand
       image:
         repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-brand-ecr"
         tag: "latest"
         pullPolicy: Always
-        ports:
-          - number: 8081
-        env:
-          BRAND_SERVER_PORT: "8081"
-          secret:
-            BRAND_DB_URL: jdbc:mariadb://brand-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/brand-shoppingoo-database-cicd:3306/branddb
-            BRAND_DB_USERNAME: shoppingooadmin
-            BRAND_DB_PASSWORD: 404notfound!
+      ports:
+        - number: 8081
+      env:
+        BRAND_SERVER_PORT: "8081"
+      secret:
+        BRAND_DB_URL: "jdbc:mariadb://brand-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/brand-shoppingoo-database-cicd:3306/branddb"
+        BRAND_DB_USERNAME: "shoppingooadmin"
+        BRAND_DB_PASSWORD: "404notfound!"
 
     - name: backend-apigateway
       image:
@@ -47,7 +47,7 @@ backend:
         - number: 8089
       env:
         secret: {}
-      
+
 frontend:
   image:
     repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/frontend-ecr"
