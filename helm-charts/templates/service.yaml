@@ -1,17 +1,22 @@
+# Backend Services
+{{- range .Values.backend.services }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: shortpingoo-backend-svc
+  name: {{ .name }}-svc
+  namespace: shortpingoo
 spec:
-  type: {{ .Values.backend.service.type }}
+  type: {{ .type | default "ClusterIP" }}
   selector:
-    app: backend
+    app: {{ .name }}
   ports:
     - protocol: TCP
-      port: {{ .Values.backend.service.port }}
-      targetPort: {{ .Values.backend.service.port }}
+      port: {{ .ports[0].number }}
+      targetPort: {{ .ports[0].number }}
+{{- end }}
 
 ---
+# Frontend Services
 apiVersion: v1
 kind: Service
 metadata:

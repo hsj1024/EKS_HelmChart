@@ -4,13 +4,18 @@ metadata:
   name: {{ .Release.Name }}-config
 data:
   # 백엔드 환경 변수
-  SERVER_PORT: "{{ .Values.backend.env.SERVER_PORT }}"
-  JWT_SECRET: "{{ .Values.backend.env.JWT_SECRET }}"
-  SECURITY_USER_NAME: "{{ .Values.backend.env.SECURITY_USER_NAME }}"
-  SECURITY_USER_PASSWORD: "{{ .Values.backend.env.SECURITY_USER_PASSWORD }}"
-  TOKEN_SECRET_KEY: "{{ .Values.backend.env.TOKEN_SECRET_KEY }}"
-  ACCESS_TOKEN_PLUS_HOUR: "{{ .Values.backend.env.ACCESS_TOKEN_PLUS_HOUR }}"
-  REFRESH_TOKEN_PLUS_HOUR: "{{ .Values.backend.env.REFRESH_TOKEN_PLUS_HOUR }}"
+  USER_SERVER_PORT: "{{ .Values.backend.env.USER_SERVER_PORT }}"
+  USER_JWT_SECRET: "{{ .Values.backend.env.USER_JWT_SECRET }}"
+  USER_SECURITY_USER_NAME: "{{ .Values.backend.env.USER_SECURITY_USER_NAME }}"
+  USER_SECURITY_USER_PASSWORD: "{{ .Values.backend.env.USER_SECURITY_USER_PASSWORD }}"
+  USER_TOKEN_SECRET_KEY: "{{ .Values.backend.env.USER_TOKEN_SECRET_KEY }}"
+  USER_ACCESS_TOKEN_PLUS_HOUR: "{{ .Values.backend.env.USER_ACCESS_TOKEN_PLUS_HOUR }}"
+  USER_REFRESH_TOKEN_PLUS_HOUR: "{{ .Values.backend.env.USER_REFRESH_TOKEN_PLUS_HOUR }}"
+  
+  BRAND_SERVER_PORT: "{{ .Values.backend.env.BRAND_SERVER_PORT }}"
+  BRAND_DB_URL: "{{ .Values.backend.env.BRAND_DB_URL }}"
+  BRAND_DB_USERNAME: "{{ .Values.backend.env.BRAND_DB_USERNAME }}"
+  BRAND_DB_PASSWORD: "{{ .Values.backend.env.BRAND_DB_PASSWORD }}"
 
   # 프론트엔드 환경 변수
   REACT_APP_API_BASE_URL: "{{ .Values.frontend.env.REACT_APP_API_BASE_URL }}"

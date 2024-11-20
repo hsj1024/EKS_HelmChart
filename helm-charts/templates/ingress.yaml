@@ -40,10 +40,22 @@ spec:
                 name: shortpingoo-backend-svc
                 port:
                   number: 8080
-          - path: /eureka
+
+          # Backend 경로 (API, Open-API)
+          {{- range .Values.backend.services }}
+          - path: /api
             pathType: Prefix
             backend:
               service:
-                name: shortpingoo-app-eureka-server
+                name: {{ .name }}-svc
                 port:
-                  number: 8088
+                  number: {{ .ports[0].number }}
+          - path: /open-api
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .name }}-svc
+                port:
+                  number: {{ .ports[0].number }}
+          {{- end }}
+          
