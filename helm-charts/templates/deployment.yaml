@@ -75,6 +75,6 @@ spec:
             - containerPort: {{ .Values.frontend.service.port }}
           envFrom:
             - configMapRef:
-                name: shortpingoo-config
+                name: shortpingoo-app-config
             - secretRef:
                 name: shortpingoo-secrets
