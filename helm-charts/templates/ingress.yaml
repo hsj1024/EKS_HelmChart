@@ -14,7 +14,6 @@ metadata:
   labels:
     app.kubernetes.io/instance: shortpingoo-app
 spec:
-  ingressClassName: "alb"
   rules:
     - host: shortpingoo.shop
       http:
@@ -42,20 +41,20 @@ spec:
                   number: 8080
 
           {{- range .Values.backend.services }}
+          {{- $serviceName := .name }}
           {{- range .ports }}
-
           - path: /api
             pathType: Prefix
             backend:
               service:
-                name: {{ .name }}-svc
+                name: {{ $serviceName }}-svc
                 port:
                   number: {{ .number }}
           - path: /open-api
             pathType: Prefix
             backend:
               service:
-                name: {{ .name }}-svc
+                name: {{ $serviceName }}-svc
                 port:
                   number: {{ .number }}
           {{- end }}
