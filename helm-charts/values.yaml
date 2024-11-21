@@ -1,6 +1,6 @@
 replicaCount: 1
 # 각각의 타임스탬프를 독립적으로 관리
-backendTimestamp: "20241121001752"
+backendTimestamp: "20241121004412"
 frontendTimestamp: "20241119092509"
 backend:
   services:
@@ -39,7 +39,7 @@ backend:
     - name: backend-apigateway
       image:
         repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/apigateway-ecr"
-        tag: "latest"
+        tag: "20241121004412"
         pullPolicy: Always
       ports:
         - number: 8089
