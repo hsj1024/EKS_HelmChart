@@ -1,0 +1,89 @@
+# ServiceAccount
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: shortpingoo-backend-apigateway-sa
+  namespace: shortpingoo
+  labels:
+    app.kubernetes.io/managed-by: "Helm"
+  annotations:
+    meta.helm.sh/release-name: "shortpingoo"
+    meta.helm.sh/release-namespace: "shortpingoo"
+
+---
+
+# Role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: shortpingoo
+  name: shortpingoo-apigateway-role
+  labels:
+    app.kubernetes.io/managed-by: "Helm"
+  annotations:
+    meta.helm.sh/release-name: "shortpingoo"
+    meta.helm.sh/release-namespace: "shortpingoo"
+rules:
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["*"]
+
+---
+
+# RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: shortpingoo-apigateway-rolebinding
+  namespace: shortpingoo
+  labels:
+    app.kubernetes.io/managed-by: "Helm"
+  annotations:
+    meta.helm.sh/release-name: "shortpingoo"
+    meta.helm.sh/release-namespace: "shortpingoo"
+subjects:
+  - kind: ServiceAccount
+    name: shortpingoo-backend-apigateway-sa
+    namespace: shortpingoo
+roleRef:
+  kind: Role
+  name: shortpingoo-apigateway-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
+# ClusterRole for apigateway
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: shortpingoo-apigateway-clusterrole
+  labels:
+    app.kubernetes.io/managed-by: "Helm"
+  annotations:
+    meta.helm.sh/release-name: "shortpingoo"
+    meta.helm.sh/release-namespace: "shortpingoo"
+rules:
+  - apiGroups: [""]
+    resources: ["services", "endpoints"]
+    verbs: ["get", "list", "watch"]
+
+---
+
+# ClusterRoleBinding for apigateway
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: shortpingoo-apigateway-clusterrolebinding
+  labels:
+    app.kubernetes.io/managed-by: "Helm"
+  annotations:
+    meta.helm.sh/release-name: "shortpingoo"
+    meta.helm.sh/release-namespace: "shortpingoo"
+subjects:
+  - kind: ServiceAccount
+    name: shortpingoo-backend-apigateway-sa
+    namespace: shortpingoo
+roleRef:
+  kind: ClusterRole
+  name: shortpingoo-apigateway-clusterrole
+  apiGroup: rbac.authorization.k8s.io

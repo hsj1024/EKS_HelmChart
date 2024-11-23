@@ -1,0 +1,14 @@
+# Backend Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: shortpingoo-backend-apigateway-svc
+  namespace: shortpingoo
+spec:
+  type: {{ .Values.backend.apigateway.service.type }}
+  selector:
+    app: backend-apigateway
+  ports:
+    - protocol: TCP
+      port: {{ .Values.backend.apigateway.service.port }}
+      targetPort: {{ .Values.backend.apigateway.service.port }}

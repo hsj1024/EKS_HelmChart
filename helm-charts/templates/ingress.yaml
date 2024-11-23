@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: shortpingoo-app-ingress
+  name: shortpingoo-ingress
   namespace: shortpingoo
   annotations:
     kubernetes.io/ingress.class: "alb"
@@ -14,6 +14,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: shortpingoo-app
 spec:
+  ingressClassName: "alb"
   rules:
     - host: shortpingoo.shop
       http:
@@ -25,22 +26,18 @@ spec:
                 name: shortpingoo-frontend-svc
                 port:
                   number: 80
-          {{- range .Values.backend.services }}
-          {{- $serviceName := .name }}
-          {{- range .ports }}
           - path: /api
             pathType: Prefix
             backend:
               service:
-                name: {{ $serviceName }}-svc
+                name: shortpingoo-backend-apigateway-svc
                 port:
-                  number: {{ .number }}
+                  number: 8089
           - path: /open-api
             pathType: Prefix
             backend:
               service:
-                name: {{ $serviceName }}-svc
+                name: shortpingoo-backend-apigateway-svc
                 port:
-                  number: {{ .number }}
-          {{- end }}
-          {{- end }}
+                  number: 8089
+          

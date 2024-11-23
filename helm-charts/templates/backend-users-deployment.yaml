@@ -1,0 +1,31 @@
+# backend deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shortpingoo-backend-users
+  namespace: shortpingoo
+  labels:
+    app: backend-users
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: backend-users
+  template:
+    metadata:
+      labels:
+        app: backend-users
+    spec:
+      imagePullSecrets:
+        - name: regcred  # ECR 인증을 위한 시크릿 이름
+      containers:
+        - name: backend-users-container
+          image: "{{ .Values.backend.users.image.repository }}:{{ .Values.backend.users.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.users.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.backend.users.service.port }}
+          envFrom:
+            - configMapRef:
+                name: shortpingoo-config
+            - secretRef:
+                name: shortpingoo-secrets

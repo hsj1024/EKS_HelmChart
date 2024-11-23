@@ -1,61 +1,69 @@
 replicaCount: 1
 # 각각의 타임스탬프를 독립적으로 관리
 backendTimestamp: "20241121004412"
-frontendTimestamp: "20241121011602"
+frontendTimestamp: "20241122002657"
+
 backend:
-  services:
-    - name: backend-users
-      image:
-        repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-users-ecr"
-        tag: "20241121001752"
-        pullPolicy: Always
-      ports:
-        - number: 8080
-      env:
-        USER_SERVER_PORT: "8080"
-        USER_JWT_SECRET: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
-        USER_SECURITY_USER_NAME: "admin"
-        USER_SECURITY_USER_PASSWORD: "1234"
-        USER_TOKEN_SECRET_KEY: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
-        USER_ACCESS_TOKEN_PLUS_HOUR: "1"
-        USER_REFRESH_TOKEN_PLUS_HOUR: "24"
-      secret:
-        USER_DB_URL: "jdbc:mariadb://users-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/usersdb"
-        USER_DB_USERNAME: "shoppingooadmin"
-        USER_DB_PASSWORD: "404notfound!"
-    - name: backend-brand
-      image:
-        repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-brand-ecr"
-        tag: "20241120173106"
-        pullPolicy: Always
-      ports:
-        - number: 8081
-      env:
-        BRAND_SERVER_PORT: "8081"
-      secret:
-        BRAND_DB_URL: "jdbc:mariadb://brand-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/brand-shoppingoo-database-cicd:3306/branddb"
-        BRAND_DB_USERNAME: "shoppingooadmin"
-        BRAND_DB_PASSWORD: "404notfound!"
-    - name: backend-apigateway
-      image:
-        repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/apigateway-ecr"
-        tag: "20241121004412"
-        pullPolicy: Always
-      ports:
-        - number: 8089
-      env:
-        secret: {}
+  users:
+    image:
+      repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-users-ecr"
+      tag: "20241122101819"
+      pullPolicy: Always
+    service:
+      type: ClusterIP
+      port: 8080
+    env:
+      USER_SERVER_PORT: "8080"
+      USER_JWT_SECRET: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
+      USER_SECURITY_USER_NAME: "admin"
+      USER_SECURITY_USER_PASSWORD: "1234"
+      USER_TOKEN_SECRET_KEY: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
+      USER_ACCESS_TOKEN_PLUS_HOUR: "1"
+      USER_REFRESH_TOKEN_PLUS_HOUR: "24"
+    secret:
+      USER_DB_URL: "jdbc:mariadb://users-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/usersdb"
+      USER_DB_USERNAME: "shoppingooadmin"
+      USER_DB_PASSWORD: "404notfound!"
+
+  brand:
+    image:
+      repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-brand-ecr"
+      tag: "20241122112548"
+      pullPolicy: Always
+    service:
+      type: ClusterIP
+      port: 8081
+    env:
+      BRAND_SERVER_PORT: "8081"
+    secret:
+      BRAND_DB_URL: "jdbc:mariadb://brand-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/branddb"
+      BRAND_DB_USERNAME: "shoppingooadmin"
+      BRAND_DB_PASSWORD: "404notfound!"
+
+  apigateway:
+    image:
+      repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/apigateway-ecr"
+      tag: "20241122020401"
+      pullPolicy: Always
+    service:
+      type: ClusterIP
+      port: 8089
+    env:
+      API_GATEWAY_JWT_KEY: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
+
 frontend:
   image:
     repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/frontend-ecr"
-    tag: "20241121011602"
+    tag: "20241122110104"
     pullPolicy: Always
   service:
-    type: LoadBalancer
+    type: ClusterIP
     port: 80
   env:
     REACT_APP_API_BASE_URL: "https://shortpingoo.shop"
+    REACT_APP_API_BASE_URL_APIgateway: "https://shortpingoo.shop"
     REACT_APP_ENV: "production"
+
 ingress:
   awsCertArn: "arn:aws:acm:ap-northeast-2:565393064007:certificate/82c4718b-d3ec-4d6b-9233-bfaa647368d2"
   tlsSecretName: "shortpingoo-secrets"

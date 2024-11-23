@@ -2,54 +2,53 @@
     "apiVersion": "v1",
     "kind": "Namespace",
     "metadata": {
-        "creationTimestamp": "2024-11-12T05:06:09Z",
-        "deletionTimestamp": "2024-11-12T06:07:50Z",
+        "creationTimestamp": "2024-11-21T07:31:27Z",
+        "deletionTimestamp": "2024-11-21T07:39:58Z",
         "labels": {
-            "kubernetes.io/metadata.name": "shortpingoo",
-            "name": "shortpingoo"
+            "kubernetes.io/metadata.name": "shortpingoo"
         },
         "name": "shortpingoo",
-        "resourceVersion": "66471",
-        "uid": "c5d0646f-67d9-4e1f-a8da-723c9c72c9da"
+        "resourceVersion": "46929",
+        "uid": "62428fe1-4d2d-4922-8e08-7a9a107fe277"
     },
     "spec": {
         "finalizers": [
-            
+           
         ]
     },
     "status": {
         "conditions": [
             {
-                "lastTransitionTime": "2024-11-12T06:07:56Z",
+                "lastTransitionTime": "2024-11-21T07:40:05Z",
                 "message": "All resources successfully discovered",
                 "reason": "ResourcesDiscovered",
                 "status": "False",
                 "type": "NamespaceDeletionDiscoveryFailure"
             },
             {
-                "lastTransitionTime": "2024-11-12T06:07:56Z",
+                "lastTransitionTime": "2024-11-21T07:40:05Z",
                 "message": "All legacy kube types successfully parsed",
                 "reason": "ParsedGroupVersions",
                 "status": "False",
                 "type": "NamespaceDeletionGroupVersionParsingFailure"
             },
             {
-                "lastTransitionTime": "2024-11-12T06:07:56Z",
+                "lastTransitionTime": "2024-11-21T07:40:05Z",
                 "message": "All content successfully deleted, may be waiting on finalization",
                 "reason": "ContentDeleted",
                 "status": "False",
                 "type": "NamespaceDeletionContentFailure"
             },
             {
-                "lastTransitionTime": "2024-11-12T06:07:56Z",
-                "message": "Some resources are remaining: ingresses.networking.k8s.io has 1 resource instances, services. has 2 resource instances, targetgroupbindings.elbv2.k8s.aws has 2 resource instances",
+                "lastTransitionTime": "2024-11-21T07:40:05Z",
+                "message": "Some resources are remaining: ingresses.networking.k8s.io has 1 resource instances",
                 "reason": "SomeResourcesRemain",
                 "status": "True",
                 "type": "NamespaceContentRemaining"
             },
             {
-                "lastTransitionTime": "2024-11-12T06:07:56Z",
-                "message": "Some content in the namespace has finalizers remaining: elbv2.k8s.aws/resources in 2 resource instances, ingress.k8s.aws/resources in 1 resource instances, service.k8s.aws/resources in 2 resource instances",
+                "lastTransitionTime": "2024-11-21T07:40:05Z",
+                "message": "Some content in the namespace has finalizers remaining: ingress.k8s.aws/resources in 1 resource instances",
                 "reason": "SomeFinalizersRemain",
                 "status": "True",
                 "type": "NamespaceFinalizersRemaining"

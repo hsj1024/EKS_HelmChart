@@ -1,0 +1,37 @@
+# backend deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shortpingoo-backend-apigateway
+  namespace: shortpingoo
+  labels:
+    app: backend-apigateway
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: backend-apigateway
+  template:
+    metadata:
+      labels:
+        app: backend-apigateway
+    spec:
+      serviceAccountName: shortpingoo-backend-apigateway-sa
+
+      imagePullSecrets:
+        - name: regcred  # ECR 인증을 위한 시크릿 이름
+      containers:
+        - name: backend-apigateway-container
+          image: "{{ .Values.backend.apigateway.image.repository }}:{{ .Values.backend.apigateway.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.apigateway.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.backend.apigateway.service.port }}
+          envFrom:
+            - configMapRef:
+                name: shortpingoo-config
+            - secretRef:
+                name: shortpingoo-secrets
+
+
+    
+

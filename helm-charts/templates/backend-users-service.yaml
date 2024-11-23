@@ -1,0 +1,14 @@
+# Backend Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: shortpingoo-backend-users-svc
+  namespace: shortpingoo
+spec:
+  type: {{ .Values.backend.users.service.type }}
+  selector:
+    app: backend-users
+  ports:
+    - protocol: TCP
+      port: {{ .Values.backend.users.service.port }}
+      targetPort: {{ .Values.backend.users.service.port }}
