@@ -54,7 +54,7 @@ backend:
 frontend:
   image:
     repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/frontend-ecr"
-    tag: "20241122110104"
+    tag: "20241126061312"
     pullPolicy: Always
   service:
     type: ClusterIP
@@ -63,6 +63,19 @@ frontend:
     REACT_APP_API_BASE_URL: "https://shortpingoo.shop"
     REACT_APP_API_BASE_URL_APIgateway: "https://shortpingoo.shop"
     REACT_APP_ENV: "production"
+# ai:
+#   image:
+#     repository: "dockerimage 추가"
+#     tag: "latest"
+#     pullPolicy: Always
+#   service:
+#     type: ClusterIP
+#     port: 5001
+#   env:
+#    FLASK_HOST: ""
+#    FLASK_PORT: ""
+#   secret:
+#     YOUTUBE_API_KEY: "AIzaSyAUpVbHQYJp9yhiXzRw6Gj2j9T1dFrkaAM"
 
 ingress:
   awsCertArn: "arn:aws:acm:ap-northeast-2:565393064007:certificate/82c4718b-d3ec-4d6b-9233-bfaa647368d2"
