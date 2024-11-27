@@ -1,6 +1,6 @@
 # HelmChart for Argo
 
-이 리포지토리는 **Helm Chart를 통해 Kubernetes 애플리케이션을 배포하고, Argo CD를 활용하여 지속적 배포(CD)**를 구현하기 위한 프로젝트입니다. 해당 Helm Chart는 수동 배포와 GitOps 기반의 자동화를 모두 지원합니다.
+이 리포지토리는 **Helm Chart를 통해 Kubernetes 애플리케이션을 배포하고, Argo CD를 활용하여 지속적 배포(CD)** 를 구현하기 위한 프로젝트입니다. 해당 Helm Chart는 수동 배포와 GitOps 기반의 자동화를 모두 지원합니다.
 
 
 ## 주요 기능
@@ -26,7 +26,7 @@
 
 ### 1. Helm 설치
 
-Helm이 설치되어 있지 않다면 [Helm 공식 문서](https://helm.sh/docs/intro/install/)를 참조하여 설치하십시오.
+Helm이 설치되어 있지 않다면 [Helm 공식 문서](https://helm.sh/docs/intro/install/)를 참조하여 설치하세요.
 
 ```bash
 # Helm 설치 확인
