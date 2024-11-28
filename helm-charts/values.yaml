@@ -28,7 +28,7 @@ backend:
   brand:
     image:
       repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-brand-ecr"
-      tag: "20241122112548"
+      tag: "20241127082625"
       pullPolicy: Always
     service:
       type: ClusterIP
@@ -39,11 +39,12 @@ backend:
       BRAND_DB_URL: "jdbc:mariadb://brand-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/branddb"
       BRAND_DB_USERNAME: "shoppingooadmin"
       BRAND_DB_PASSWORD: "404notfound!"
+      # BRAND_S3_BUCKET_NAME: ""
 
   apigateway:
     image:
       repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/apigateway-ecr"
-      tag: "20241122020401"
+      tag: "20241127093642"
       pullPolicy: Always
     service:
       type: ClusterIP
@@ -54,7 +55,7 @@ backend:
 frontend:
   image:
     repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/frontend-ecr"
-    tag: "20241126061312"
+    tag: "20241127084235"
     pullPolicy: Always
   service:
     type: ClusterIP
@@ -63,19 +64,25 @@ frontend:
     REACT_APP_API_BASE_URL: "https://shortpingoo.shop"
     REACT_APP_API_BASE_URL_APIgateway: "https://shortpingoo.shop"
     REACT_APP_ENV: "production"
-# ai:
-#   image:
-#     repository: "dockerimage 추가"
-#     tag: "latest"
-#     pullPolicy: Always
-#   service:
-#     type: ClusterIP
-#     port: 5001
-#   env:
-#    FLASK_HOST: ""
-#    FLASK_PORT: ""
-#   secret:
-#     YOUTUBE_API_KEY: "AIzaSyAUpVbHQYJp9yhiXzRw6Gj2j9T1dFrkaAM"
+ai:
+  image:
+    repository: "waseoke/ai-sentiment-classification-rds"
+    tag: "latest"
+    pullPolicy: Always
+  service:
+    type: ClusterIP
+    port: 5001
+  env:
+   FLASK_RUN_HOST: "0.0.0.0"
+   FLASK_RUN_PORT: "5001"
+   FLASK_APP: "app.py"
+  secret:
+    YOUTUBE_API_KEY: "AIzaSyAUpVbHQYJp9yhiXzRw6Gj2j9T1dFrkaAM"
+    AI_BRAND_DB_HOST: "brand-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com"
+    AI_BRAND_DB_PORT: "3306"
+    AI_BRAND_DB_NAME: "branddb"
+    AI_BRAND_DB_USER: "shoppingooadmin"
+    AI_BRAND_DB_PASSWORD: "404notfound!"
 
 ingress:
   awsCertArn: "arn:aws:acm:ap-northeast-2:565393064007:certificate/82c4718b-d3ec-4d6b-9233-bfaa647368d2"

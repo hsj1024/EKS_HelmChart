@@ -26,6 +26,6 @@ data:
 
 
   # AI 환경변수
-  # YOUTUBE_API_KEY: "AIzaSyAUpVbHQYJp9yhiXzRw6Gj2j9T1dFrkaAM"
-  # FLASK_HOST: ""
-  # FLASK_PORT: "5001"
+  FLASK_RUN_HOST: "0.0.0.0"
+  FLASK_RUN_PORT: "5001"
+  FLASK_APP: "app.py"

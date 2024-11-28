@@ -1,0 +1,14 @@
+# AI Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: shortpingoo-ai-flask-svc
+  namespace: shortpingoo
+spec:
+  type: {{ .Values.ai.service.type }} # ClusterIP
+  selector:
+    app: ai-flask
+  ports:
+    - protocol: TCP
+      port: 5001 # 외부에서 접근할 포트
+      targetPort: 5001 # Flask 컨테이너에서 사용 중인 포트
