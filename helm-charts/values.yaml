@@ -61,7 +61,8 @@ backend:
       type: ClusterIP
       port: 8082
     env:
-      ORDER_SERVER_PORT: "8082"
+      BRAND_API_URL: https://shortpingoo.shop/api/brand
+      STOCK_API_URL: https://shortpingoo.shop/open-api/brand/product/stock
     secret:
       ORDER_DB_URL: "jdbc:mariadb://order-shoppingoo-database.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/orderdb"
       ORDER_DB_USERNAME: "shoppingooadmin"

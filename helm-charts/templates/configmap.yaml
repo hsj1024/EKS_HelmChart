@@ -18,6 +18,12 @@ data:
   AWS_REGION: "ap-northeast-2"
   S3_BUCKET_NAME: "shortpingoo-backendbucket"
   BRAND_S3_URL: "https://${S3_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com"
+  
+
+  #Order
+  BRAND_API_URL: https://shortpingoo.shop/api/brand
+  STOCK_API_URL: https://shortpingoo.shop/open-api/brand/product/stock
+
 
   # API GATEWAY
   API_GATEWAY_JWT_KEY: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
