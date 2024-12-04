@@ -59,7 +59,7 @@ backend:
       pullPolicy: Always
     service:
       type: ClusterIP
-      port: 8080
+      port: 8082
     env:
       ORDER_SERVER_PORT: "8082"
       ORDER_JWT_SECRET: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
