@@ -62,22 +62,15 @@ backend:
       port: 8082
     env:
       ORDER_SERVER_PORT: "8082"
-      ORDER_JWT_SECRET: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
-      ORDER_SECURITY_USER_NAME: "admin"
-      ORDER_SECURITY_USER_PASSWORD: "1234"
-      ORDER_TOKEN_SECRET_KEY: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
-      ORDER_ACCESS_TOKEN_PLUS_HOUR: "1"
-      ORDER_REFRESH_TOKEN_PLUS_HOUR: "24"
     secret:
-      ORDER_DB_URL: "jdbc:mariadb://order-shoppingoo-database.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/order"
+      ORDER_DB_URL: "jdbc:mariadb://order-shoppingoo-database.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/orderdb"
       ORDER_DB_USERNAME: "shoppingooadmin"
       ORDER_DB_PASSWORD: "404notfound!"
-
 
   apigateway:
     image:
       repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/apigateway-ecr"
-      tag: "20241203022322"
+      tag: "20241204044739"
       pullPolicy: Always
     service:
       type: ClusterIP
