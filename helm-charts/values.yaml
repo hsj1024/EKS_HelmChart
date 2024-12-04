@@ -7,7 +7,7 @@ backend:
   users:
     image:
       repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-users-ecr"
-      tag: "20241122101819"
+      tag: "20241203034926"
       pullPolicy: Always
     service:
       type: ClusterIP
@@ -21,30 +21,63 @@ backend:
       USER_ACCESS_TOKEN_PLUS_HOUR: "1"
       USER_REFRESH_TOKEN_PLUS_HOUR: "24"
     secret:
-      USER_DB_URL: "jdbc:mariadb://users-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/usersdb"
+      USER_DB_URL: "jdbc:mariadb://users-shoppingoo-cicd-db.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/usersdb"
       USER_DB_USERNAME: "shoppingooadmin"
       USER_DB_PASSWORD: "404notfound!"
 
   brand:
     image:
       repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-brand-ecr"
-      tag: "20241127082625"
+      tag: "20241203125939"
       pullPolicy: Always
     service:
       type: ClusterIP
       port: 8081
     env:
       BRAND_SERVER_PORT: "8081"
+      AWS_REGION: "ap-northeast-2"
+      S3_BUCKET_NAME: "shortpingoo-backendbucket"
+      BRAND_S3_URL: "https://${S3_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com"
     secret:
-      BRAND_DB_URL: "jdbc:mariadb://brand-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/branddb"
+      BRAND_DB_URL: "jdbc:mariadb://brand-shoppingoo-db-pb.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/branddb?useUnicode=true&characterEncoding=utf8mb4"
       BRAND_DB_USERNAME: "shoppingooadmin"
       BRAND_DB_PASSWORD: "404notfound!"
-      # BRAND_S3_BUCKET_NAME: ""
+      AWS_ACCESS_KEY_ID:
+        valueFrom:
+          secretKeyRef:
+            name: shortpingoo-secrets
+            key: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY:
+        valueFrom:
+          secretKeyRef:
+            name: shortpingoo-secrets
+            key: AWS_SECRET_ACCESS_KEY
+  order:
+    image:
+      repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-order-ecr"
+      tag: "20241203034926"
+      pullPolicy: Always
+    service:
+      type: ClusterIP
+      port: 8080
+    env:
+      ORDER_SERVER_PORT: "8082"
+      ORDER_JWT_SECRET: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
+      ORDER_SECURITY_USER_NAME: "admin"
+      ORDER_SECURITY_USER_PASSWORD: "1234"
+      ORDER_TOKEN_SECRET_KEY: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
+      ORDER_ACCESS_TOKEN_PLUS_HOUR: "1"
+      ORDER_REFRESH_TOKEN_PLUS_HOUR: "24"
+    secret:
+      ORDER_DB_URL: "jdbc:mariadb://order-shoppingoo-database.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/order"
+      ORDER_DB_USERNAME: "shoppingooadmin"
+      ORDER_DB_PASSWORD: "404notfound!"
+
 
   apigateway:
     image:
       repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/apigateway-ecr"
-      tag: "20241127093642"
+      tag: "20241203022322"
       pullPolicy: Always
     service:
       type: ClusterIP
@@ -55,7 +88,7 @@ backend:
 frontend:
   image:
     repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/frontend-ecr"
-    tag: "20241127084235"
+    tag: "20241204042409"
     pullPolicy: Always
   service:
     type: ClusterIP
@@ -64,25 +97,25 @@ frontend:
     REACT_APP_API_BASE_URL: "https://shortpingoo.shop"
     REACT_APP_API_BASE_URL_APIgateway: "https://shortpingoo.shop"
     REACT_APP_ENV: "production"
-ai:
-  image:
-    repository: "waseoke/ai-sentiment-classification-rds"
-    tag: "latest"
-    pullPolicy: Always
-  service:
-    type: ClusterIP
-    port: 5001
-  env:
-   FLASK_RUN_HOST: "0.0.0.0"
-   FLASK_RUN_PORT: "5001"
-   FLASK_APP: "app.py"
-  secret:
-    YOUTUBE_API_KEY: "AIzaSyAUpVbHQYJp9yhiXzRw6Gj2j9T1dFrkaAM"
-    AI_BRAND_DB_HOST: "brand-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com"
-    AI_BRAND_DB_PORT: "3306"
-    AI_BRAND_DB_NAME: "branddb"
-    AI_BRAND_DB_USER: "shoppingooadmin"
-    AI_BRAND_DB_PASSWORD: "404notfound!"
+# ai:
+#   image:
+#     repository: "waseoke/ai-sentiment-classification-rds"
+#     tag: "latest"
+#     pullPolicy: Always
+#   service:
+#     type: ClusterIP
+#     port: 5001
+#   env:
+#    FLASK_RUN_HOST: "0.0.0.0"
+#    FLASK_RUN_PORT: "5001"
+#    FLASK_APP: "app.py"
+#   secret:
+#     YOUTUBE_API_KEY: "AIzaSyASZExETg_UYPJnmjrS0vpw82hI8bqV-n0"
+#     AI_BRAND_DB_HOST: "brand-shoppingoo-database-cicd.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com"
+#     AI_BRAND_DB_PORT: "3306"
+#     AI_BRAND_DB_NAME: "branddb"
+#     AI_BRAND_DB_USER: "shoppingooadmin"
+#     AI_BRAND_DB_PASSWORD: "404notfound!"
 
 ingress:
   awsCertArn: "arn:aws:acm:ap-northeast-2:565393064007:certificate/82c4718b-d3ec-4d6b-9233-bfaa647368d2"

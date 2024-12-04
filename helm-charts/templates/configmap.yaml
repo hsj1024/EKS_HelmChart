@@ -15,6 +15,9 @@ data:
   
   # Brand
   BRAND_SERVER_PORT: "8081"
+  AWS_REGION: "ap-northeast-2"
+  S3_BUCKET_NAME: "shortpingoo-backendbucket"
+  BRAND_S3_URL: "https://${S3_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com"
 
   # API GATEWAY
   API_GATEWAY_JWT_KEY: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
@@ -26,6 +29,6 @@ data:
 
 
   # AI 환경변수
-  FLASK_RUN_HOST: "0.0.0.0"
-  FLASK_RUN_PORT: "5001"
-  FLASK_APP: "app.py"
+  # FLASK_RUN_HOST: "0.0.0.0"
+  # FLASK_RUN_PORT: "5001"
+  # FLASK_APP: "app.py"
