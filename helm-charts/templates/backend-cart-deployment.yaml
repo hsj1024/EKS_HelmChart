@@ -1,0 +1,31 @@
+# backend cart deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shortpingoo-backend-cart
+  namespace: shortpingoo
+  labels:
+    app: backend-cart
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: backend-cart
+  template:
+    metadata:
+      labels:
+        app: backend-cart
+    spec:
+      imagePullSecrets:
+        - name: regcred  # ECR 인증을 위한 시크릿 이름
+      containers:
+        - name: backend-cart-container
+          image: "{{ .Values.backend.cart.image.repository }}:{{ .Values.backend.cart.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.cart.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.backend.cart.service.port }}
+          envFrom:
+            - configMapRef:
+                name: shortpingoo-config
+            - secretRef:
+                name: shortpingoo-secrets

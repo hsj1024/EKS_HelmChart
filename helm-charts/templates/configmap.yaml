@@ -21,7 +21,7 @@ data:
   
 
   #Order
-  BRAND_API_URL: https://shortpingoo.shop/api/brand
+  BRAND_API_URL: https://shortpingoo.shop/api/brand/product/owner
   STOCK_API_URL: https://shortpingoo.shop/open-api/brand/product/stock
 
 

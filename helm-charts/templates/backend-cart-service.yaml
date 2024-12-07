@@ -1,0 +1,14 @@
+# Backend cart Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: shortpingoo-backend-cart-svc
+  namespace: shortpingoo
+spec:
+  type: {{ .Values.backend.cart.service.type }}
+  selector:
+    app: backend-cart
+  ports:
+    - protocol: TCP
+      port: {{ .Values.backend.cart.service.port }}
+      targetPort: {{ .Values.backend.cart.service.port }}
