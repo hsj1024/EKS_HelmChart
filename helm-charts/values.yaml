@@ -28,7 +28,7 @@ backend:
   brand:
     image:
       repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-brand-ecr"
-      tag: "20241206115749"
+      tag: "20241207193839"
       pullPolicy: Always
     service:
       type: ClusterIP
@@ -42,6 +42,7 @@ backend:
       BRAND_DB_URL: "jdbc:mariadb://brand-shoppingoo-db-pb.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/branddb?useUnicode=true&characterEncoding=utf8mb4"
       BRAND_DB_USERNAME: "shoppingooadmin"
       BRAND_DB_PASSWORD: "404notfound!"
+      FLASK_API_URL: "https://shortpingoo.shop/api/shorts/search"
       AWS_ACCESS_KEY_ID:
         valueFrom:
           secretKeyRef:
@@ -55,7 +56,7 @@ backend:
   order:
     image:
       repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-order-ecr"
-      tag: "20241205094007"
+      tag: "20241207150326"
       pullPolicy: Always
     service:
       type: ClusterIP
@@ -71,18 +72,18 @@ backend:
   apigateway:
     image:
       repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/apigateway-ecr"
-      tag: "20241205082854"
+      tag: "20241207191326"
       pullPolicy: Always
     service:
       type: ClusterIP
       port: 8089
     env:
       API_GATEWAY_JWT_KEY: "SpringBootJWTHelperTokenSecretKeyValue123!@1"
-      
+
   cart:
     image:
       repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-cart-ecr"
-      tag: ""
+      tag: "20241207021236"
       pullPolicy: Always
     service:
       type: ClusterIP
@@ -95,7 +96,7 @@ backend:
 frontend:
   image:
     repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/frontend-ecr"
-    tag: "20241206131021"
+    tag: "20241207131729"
     pullPolicy: Always
   service:
     type: ClusterIP
@@ -104,25 +105,33 @@ frontend:
     REACT_APP_API_BASE_URL: "https://shortpingoo.shop"
     REACT_APP_API_BASE_URL_APIgateway: "https://shortpingoo.shop"
     REACT_APP_ENV: "production"
-# ai:
-#   image:
-#     repository: "waseoke/ai-sentiment-classification-rds"
-#     tag: "latest"
-#     pullPolicy: Always
-#   service:
-#     type: ClusterIP
-#     port: 5001
-#   env:
-#    FLASK_RUN_HOST: "0.0.0.0"
-#    FLASK_RUN_PORT: "5001"
-#    FLASK_APP: "app.py"
-#   secret:
-#     YOUTUBE_API_KEY: "AIzaSyASZExETg_UYPJnmjrS0vpw82hI8bqV-n0"
-#     AI_BRAND_DB_HOST: "brand-shoppingoo-db-pb.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com"
-#     AI_BRAND_DB_PORT: "3306"
-#     AI_BRAND_DB_NAME: "branddb"
-#     AI_BRAND_DB_USER: "shoppingooadmin"
-#     AI_BRAND_DB_PASSWORD: "404notfound!"
+ai:
+  image:
+    repository: "waseoke/ai-sentiment-classification-rds"
+    tag: "latest"
+    pullPolicy: Always
+  service:
+    type: ClusterIP
+    port: 5001
+  env:
+    FLASK_RUN_HOST: "0.0.0.0"
+    FLASK_RUN_PORT: "5001"
+    FLASK_APP: "app.py"
+  secret:
+    YOUTUBE_API_KEY: "AIzaSyASZExETg_UYPJnmjrS0vpw82hI8bqV-n0"
+    AI_BRAND_DB_HOST: "brand-shoppingoo-db-pb.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com"
+    AI_BRAND_DB_PORT: "3306"
+    AI_BRAND_DB_NAME: "branddb"
+    AI_BRAND_DB_USER: "shoppingooadmin"
+    AI_BRAND_DB_PASSWORD: "404notfound!"
+    YOUTUBE_SID: "Ao2CQTYCJ-B0x7gt_"
+    YOUTUBE_HSID: "A7Ne40yA7hVZjBOvw"
+    YOUTUBE_SSID: "Ao2CQTYCJ-B0x7gt_"
+    YOUTUBE_APISID: "7pgVed1atNFG6Pk3/A6Eth5-q1vYjhil5w"
+    YOUTUBE_SAPISID: "yzy9eFOWphBx_5nz/Ahdt_c542C-j-ilAs"
+    YOUTUBE_LOGIN_INFO: "AFmmF2swRAIgQP2ogF3STnUNxrYvDsT_D4LCrgkcjMefNk3UChPJFvYCIFHasT4V6lmCOJo0fh8lyul4CcgNZe2V1kXiWSn1jGny:QUQ3MjNmempaZWJMcE90dkxqYmNtSkJ0N2ZfQjB0Y2Z6SFdTYmhlMDJtbHJyd21VYVd5ajU1RC14WHJObGU4UXI1b3BCV25NemtVWUNxM3pUd2tIQXllcHlRdl9CMWlWZkdSZGZaSUFwMDVaR2w2aG91XzNCYTYwWTdicG9jdzlGc0RnWGRZOGlZUG83aDZkcUpVZ0JOM2ZuSV9KemVyZl9R"
+    YOUTUBE_YSC: "A1n4JrSjKBw"
+    YOUTUBE_VISITOR_INFO1_LIVE: "X0lbZcOrEBg"
 
 ingress:
   awsCertArn: "arn:aws:acm:ap-northeast-2:565393064007:certificate/82c4718b-d3ec-4d6b-9233-bfaa647368d2"

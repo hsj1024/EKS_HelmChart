@@ -1,0 +1,31 @@
+# AI Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shortpingoo-ai-flask
+  namespace: shortpingoo
+  labels:
+    app: ai-flask
+spec:
+  replicas: {{ .Values.replicaCount }} # values.yaml에서 replica 수 설정
+  selector:
+    matchLabels:
+      app: ai-flask
+  template:
+    metadata:
+      labels:
+        app: ai-flask
+    spec:
+      imagePullSecrets:
+        - name: dockerhub-secret  # Docker Hub 인증용 시크릿
+      containers:
+        - name: ai-flask-container
+          image: "{{ .Values.ai.image.repository }}:{{ .Values.ai.image.tag }}" # values.yaml에서 이미지 설정
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5001 # Flask 애플리케이션 포트
+          envFrom:
+            - configMapRef:
+                name: shortpingoo-config # 공통 설정
+            - secretRef:
+                name: shortpingoo-secrets # 민감한 데이터
