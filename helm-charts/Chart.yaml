@@ -1,5 +1,5 @@
 apiVersion: v2
 name: shortpingoo
 description: A Helm chart for deploying the shortpingoo application
-version: "20241208131331"
+version: "20241209075820"
 appVersion: "1.0"
