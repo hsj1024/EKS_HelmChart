@@ -1,7 +1,7 @@
 replicaCount: 1
 # 각각의 타임스탬프를 독립적으로 관리
 backendTimestamp: "20241121004412"
-frontendTimestamp: "20241209083318"
+frontendTimestamp: "20241209111800"
 backend:
   users:
     image:
@@ -91,7 +91,7 @@ backend:
 frontend:
   image:
     repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/frontend-ecr"
-    tag: "20241209083318"
+    tag: "20241209111800"
     pullPolicy: Always
   service:
     type: ClusterIP
