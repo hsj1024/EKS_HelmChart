@@ -1,7 +1,7 @@
 replicaCount: 1
 # 각각의 타임스탬프를 독립적으로 관리
-backendTimestamp: "20241121004412"
-frontendTimestamp: "20241209111800"
+backendTimestamp: "20241210011124"
+frontendTimestamp: "20241212031525"
 backend:
   users:
     image:
@@ -26,7 +26,7 @@ backend:
   brand:
     image:
       repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-brand-ecr"
-      tag: "20241207193839"
+      tag: "20241210024128"
       pullPolicy: Always
     service:
       type: ClusterIP
@@ -54,7 +54,7 @@ backend:
   order:
     image:
       repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-order-ecr"
-      tag: "20241207150326"
+      tag: "20241210071117"
       pullPolicy: Always
     service:
       type: ClusterIP
@@ -66,10 +66,12 @@ backend:
       ORDER_DB_URL: "jdbc:mariadb://order-shoppingoo-databse-public.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/orderdb?useUnicode=true&characterEncoding=utf8mb4"
       ORDER_DB_USERNAME: "shoppingooadmin"
       ORDER_DB_PASSWORD: "404notfound!"
+      SECRET_KEY: "gcn5BJrO02cyjHn27RMorSRZPLrGfGn5tGET0Ho5g3KFOr6DC5j5fdEV69yOoyy6kVrZFVZ1N02vz3Xa"
+      API_KEY: "5785107658725517"
   apigateway:
     image:
       repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/apigateway-ecr"
-      tag: "20241207191326"
+      tag: "20241210075407"
       pullPolicy: Always
     service:
       type: ClusterIP
@@ -79,7 +81,7 @@ backend:
   cart:
     image:
       repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-cart-ecr"
-      tag: "20241207021236"
+      tag: "20241210070556"
       pullPolicy: Always
     service:
       type: ClusterIP
@@ -88,10 +90,22 @@ backend:
       CART_DB_URL: "jdbc:mariadb://cart-shoppingoo-databse-public.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/cartdb?useUnicode=true&characterEncoding=utf8mb4"
       CART_DB_USERNAME: "shoppingooadmin"
       CART_DB_PASSWORD: "404notfound!"
+  wishlist:
+    image:
+      repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/backend-wishlist-order"
+      tag: "20241210071051"
+      pullPolicy: Always
+    service:
+      type: ClusterIP
+      port: 8083
+    secret:
+      WISHLIST_DB_URL: "jdbc:mariadb://wishlist-shoppingoo-database-public.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com:3306/wishlistdb?useUnicode=true&characterEncoding=utf8mb4"
+      WISHLIST_DB_USERNAME: "shoppingooadmin"
+      WISHLIST_DB_PASSWORD: "404notfound!"
 frontend:
   image:
     repository: "565393064007.dkr.ecr.ap-northeast-2.amazonaws.com/frontend-ecr"
-    tag: "20241209111800"
+    tag: "20241212031525"
     pullPolicy: Always
   service:
     type: ClusterIP
@@ -102,31 +116,19 @@ frontend:
     REACT_APP_ENV: "production"
 ai:
   image:
-    repository: "waseoke/ai-sentiment-classification-rds"
+    repository: "hsj1024/shorts_sentimental"
     tag: "latest"
     pullPolicy: Always
   service:
     type: ClusterIP
     port: 5001
-  env:
-    FLASK_RUN_HOST: "0.0.0.0"
-    FLASK_RUN_PORT: "5001"
-    FLASK_APP: "app.py"
   secret:
-    YOUTUBE_API_KEY: "AIzaSyASZExETg_UYPJnmjrS0vpw82hI8bqV-n0"
-    AI_BRAND_DB_HOST: "brand-shoppingoo-db-pb.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com"
-    AI_BRAND_DB_PORT: "3306"
-    AI_BRAND_DB_NAME: "branddb"
-    AI_BRAND_DB_USER: "shoppingooadmin"
-    AI_BRAND_DB_PASSWORD: "404notfound!"
-    YOUTUBE_SID: "Ao2CQTYCJ-B0x7gt_"
-    YOUTUBE_HSID: "A7Ne40yA7hVZjBOvw"
-    YOUTUBE_SSID: "Ao2CQTYCJ-B0x7gt_"
-    YOUTUBE_APISID: "7pgVed1atNFG6Pk3/A6Eth5-q1vYjhil5w"
-    YOUTUBE_SAPISID: "yzy9eFOWphBx_5nz/Ahdt_c542C-j-ilAs"
-    YOUTUBE_LOGIN_INFO: "AFmmF2swRAIgQP2ogF3STnUNxrYvDsT_D4LCrgkcjMefNk3UChPJFvYCIFHasT4V6lmCOJo0fh8lyul4CcgNZe2V1kXiWSn1jGny:QUQ3MjNmempaZWJMcE90dkxqYmNtSkJ0N2ZfQjB0Y2Z6SFdTYmhlMDJtbHJyd21VYVd5ajU1RC14WHJObGU4UXI1b3BCV25NemtVWUNxM3pUd2tIQXllcHlRdl9CMWlWZkdSZGZaSUFwMDVaR2w2aG91XzNCYTYwWTdicG9jdzlGc0RnWGRZOGlZUG83aDZkcUpVZ0JOM2ZuSV9KemVyZl9R"
-    YOUTUBE_YSC: "A1n4JrSjKBw"
-    YOUTUBE_VISITOR_INFO1_LIVE: "X0lbZcOrEBg"
+    YOUTUBE_API_KEY: "AIzaSyDG0kivbOS66mdcGFKdSM80t1mgGws4TWQ"
+    AI_DB_HOST: "brand-shoppingoo-db-pb.c7s4augo48pb.ap-northeast-2.rds.amazonaws.com"
+    AI_DB_PORT: "3306"
+    AI_DB_NAME: "branddb"
+    AI_DB_USER: "shoppingooadmin"
+    AI_DB_PASSWORD: "404notfound!"
 ingress:
   awsCertArn: "arn:aws:acm:ap-northeast-2:565393064007:certificate/82c4718b-d3ec-4d6b-9233-bfaa647368d2"
   tlsSecretName: "shortpingoo-secrets"

@@ -24,8 +24,15 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 5001 # Flask 애플리케이션 포트
+          volumeMounts:
+            - name: dshm
+              mountPath: /dev/shm    
           envFrom:
             - configMapRef:
                 name: shortpingoo-config # 공통 설정
             - secretRef:
                 name: shortpingoo-secrets # 민감한 데이터
+      volumes:
+        - name: dshm
+          emptyDir:
+            medium: Memory

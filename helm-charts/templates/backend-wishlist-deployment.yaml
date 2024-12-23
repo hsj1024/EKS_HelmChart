@@ -1,0 +1,31 @@
+# backend wishlist deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shortpingoo-backend-wishlist
+  namespace: shortpingoo
+  labels:
+    app: backend-wishlist
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: backend-wishlist
+  template:
+    metadata:
+      labels:
+        app: backend-wishlist
+    spec:
+      imagePullSecrets:
+        - name: regcred  # ECR 인증을 위한 시크릿 이름
+      containers:
+        - name: backend-wishlist-container
+          image: "{{ .Values.backend.wishlist.image.repository }}:{{ .Values.backend.wishlist.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.wishlist.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.backend.wishlist.service.port }}
+          envFrom:
+            - configMapRef:
+                name: shortpingoo-config
+            - secretRef:
+                name: shortpingoo-secrets

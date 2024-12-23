@@ -1,0 +1,14 @@
+# Backend wishlist Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: shortpingoo-backend-wishlist-svc
+  namespace: shortpingoo
+spec:
+  type: {{ .Values.backend.wishlist.service.type }}
+  selector:
+    app: backend-wishlist
+  ports:
+    - protocol: TCP
+      port: {{ .Values.backend.wishlist.service.port }}
+      targetPort: {{ .Values.backend.wishlist.service.port }}
