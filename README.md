@@ -67,12 +67,20 @@ HELMCHART-FOR-ARGO/
 ├── .github/                   # GitHub 워크플로 설정 파일
 ├── helm-charts/               # Helm Chart 디렉토리
 │   ├── templates/             # 템플릿 파일
-│   │   ├── backend-apigate.yaml
+│   │   ├── ai-flask-deployment.yaml
+│   │   ├── ai-flask-service.yaml
+│   │   ├── backend-apigateway-deployment.yaml
 │   │   ├── backend-apigateway-service.yaml
 │   │   ├── backend-brand-deployment.yaml
 │   │   ├── backend-brand-service.yaml
+│   │   ├── backend-cart-deployment.yaml
+│   │   ├── backend-cart-service.yaml
+│   │   ├── backend-order-deployment.yaml
+│   │   ├── backend-order-service.yaml
 │   │   ├── backend-users-deployment.yaml
 │   │   ├── backend-users-service.yaml
+│   │   ├── backend-wishlist-deployment.yaml
+│   │   ├── backend-wishlist-service.yaml
 │   │   ├── configmap.yaml
 │   │   ├── front-deployment.yaml
 │   │   ├── front-service.yaml
